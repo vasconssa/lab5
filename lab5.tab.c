@@ -1024,8 +1024,8 @@ static const yytype_int16 yyrline[] =
      895,   896,   903,   895,   916,   921,   921,   928,   929,   929,
      940,   941,   941,   952,   953,   953,   964,   966,   965,  1015,
     1017,  1016,  1037,  1039,  1038,  1074,  1082,  1087,  1092,  1097,
-    1102,  1107,  1107,  1118,  1118,  1121,  1125,  1124,  1164,  1165,
-    1165,  1173,  1181,  1181,  1191,  1190
+    1102,  1107,  1107,  1118,  1118,  1121,  1125,  1124,  1169,  1170,
+    1170,  1178,  1186,  1186,  1196,  1195
 };
 #endif
 
@@ -2982,35 +2982,40 @@ yyreduce:
                                     (yyval.infovar).opnd.atr.simb = (yyval.infovar).simb;
                                 } else {
                                     (yyval.infovar).opnd.atr.simb = NovaTemp ((yyval.infovar).simb->tvar);
+                                    opnd1.tipo = VAROPND;
+                                    opnd1.atr.simb = (yyval.infovar).simb;
+                                    opnd2.tipo = INTOPND;
+                                    opnd2.atr.valint = (yyvsp[0].nsubscr);
+                                    GeraQuadrupla  (OPINDEX, opnd1, opnd2, (yyval.infovar).opnd);
                                 }
                             }
                         }
-#line 2989 "lab5.tab.c"
+#line 2994 "lab5.tab.c"
     break;
 
   case 148:
-#line 1164 "lab5.y"
+#line 1169 "lab5.y"
                             {(yyval.nsubscr)=0;}
-#line 2995 "lab5.tab.c"
+#line 3000 "lab5.tab.c"
     break;
 
   case 149:
-#line 1165 "lab5.y"
+#line 1170 "lab5.y"
                               {printf("[");}
-#line 3001 "lab5.tab.c"
+#line 3006 "lab5.tab.c"
     break;
 
   case 150:
-#line 1167 "lab5.y"
+#line 1172 "lab5.y"
                         {
                             printf("]");
                             (yyval.nsubscr) = (yyvsp[-1].nsubscr);
                         }
-#line 3010 "lab5.tab.c"
+#line 3015 "lab5.tab.c"
     break;
 
   case 151:
-#line 1174 "lab5.y"
+#line 1179 "lab5.y"
                         {
                             if ((yyvsp[0].infoexpr).tipo != INTEGER && (yyvsp[0].infoexpr).tipo != CHAR){
                                 Incompatibilidade ("Tipo inadequado para subscrito");
@@ -3018,28 +3023,28 @@ yyreduce:
                             GeraQuadrupla  (OPIND, (yyvsp[0].infoexpr).opnd, opndidle, opndidle);
                             (yyval.nsubscr) = 1;
                         }
-#line 3022 "lab5.tab.c"
+#line 3027 "lab5.tab.c"
     break;
 
   case 152:
-#line 1181 "lab5.y"
+#line 1186 "lab5.y"
                                          {printf(", ");}
-#line 3028 "lab5.tab.c"
+#line 3033 "lab5.tab.c"
     break;
 
   case 153:
-#line 1182 "lab5.y"
+#line 1187 "lab5.y"
                         {
                             if ((yyvsp[0].infoexpr).tipo != INTEGER && (yyvsp[0].infoexpr).tipo != CHAR)
                                 Incompatibilidade ("Tipo inadequado para subscrito");
                             GeraQuadrupla  (OPIND, (yyvsp[0].infoexpr).opnd, opndidle, opndidle);
                             (yyval.nsubscr) = (yyvsp[-3].nsubscr) + 1;
                         }
-#line 3039 "lab5.tab.c"
+#line 3044 "lab5.tab.c"
     break;
 
   case 154:
-#line 1191 "lab5.y"
+#line 1196 "lab5.y"
                         {
                             
                             printf("%s ", (yyvsp[-1].cadeia));
@@ -3061,11 +3066,11 @@ yyreduce:
                             (yyval.simb) = simb;
                             printf("(");
                         }
-#line 3065 "lab5.tab.c"
+#line 3070 "lab5.tab.c"
     break;
 
   case 155:
-#line 1212 "lab5.y"
+#line 1217 "lab5.y"
                                           {
                             printf(")");
                             (yyval.infovar) = (yyvsp[-2].infovar);
@@ -3076,11 +3081,11 @@ yyreduce:
                                     ChecArgumentos((yyvsp[-1].infolexpr).listtipo, (yyval.infovar).simb->listparam);
                             }
                         }
-#line 3080 "lab5.tab.c"
+#line 3085 "lab5.tab.c"
     break;
 
 
-#line 3084 "lab5.tab.c"
+#line 3089 "lab5.tab.c"
 
       default: break;
     }
@@ -3274,7 +3279,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 1228 "lab5.y"
+#line 1233 "lab5.y"
   
 
 #include "lex.yy.c"

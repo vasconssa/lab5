@@ -1156,6 +1156,11 @@ Variavel		:   	ID
                                     $$.opnd.atr.simb = $$.simb;
                                 } else {
                                     $$.opnd.atr.simb = NovaTemp ($$.simb->tvar);
+                                    opnd1.tipo = VAROPND;
+                                    opnd1.atr.simb = $$.simb;
+                                    opnd2.tipo = INTOPND;
+                                    opnd2.atr.valint = $3;
+                                    GeraQuadrupla  (OPINDEX, opnd1, opnd2, $$.opnd);
                                 }
                             }
                         }
