@@ -227,7 +227,7 @@ struct celmodhead {
 /* Variaveis globais para o codigo intermediario */
 
 quadrupla quadcorrente, quadaux, quadaux2;
-modhead codintermed, modcorrente;
+modhead codintermed, modcorrente, modeprincipal;
 int oper, numquadcorrente;
 operando opnd1, opnd2, result, opndaux;
 int numtemp;
@@ -601,6 +601,12 @@ ModPrincipal  	:   	PRINCIPAL
                             declparam = FALSE;
                             escopo = simb = 
                             InsereSimb ("principal", IDFUNC, NOTVAR, escopo);
+                            /*InicCodIntermMod (simb);*/
+                            opnd1.tipo = MODOPND;
+                            opnd1.atr.modulo = codintermed->prox;
+                            modcorrente = codintermed->prox;
+                            quadcorrente = modcorrente->listquad;
+                            GeraQuadrupla (OPENMOD, opnd1, opndidle, opndidle);
                             pontvardecl = simb->listvardecl;
                             proxblocoehfuncao = TRUE;
                         }
