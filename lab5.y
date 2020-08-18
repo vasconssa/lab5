@@ -953,7 +953,7 @@ CmdAtrib      	:   	{tabular();} Variavel
                                 if ($2.simb->ndims == 0) {
                                     GeraQuadrupla (OPATRIB, $6.opnd, opndidle, $2.opnd);
                                 } else {
-                                    GeraQuadrupla (OPATRIBPONT, $2.opnd, opndidle, $6.opnd);
+                                    GeraQuadrupla (OPATRIBPONT, $6.opnd, opndidle, $2.opnd);
                                 }
                         }
                         
@@ -1124,7 +1124,13 @@ Fator		    :   	Variavel
                             if  ($1.simb != NULL) {
                                 $1.simb->ref  =  TRUE;
                                 $$.tipo = $1.simb->tvar;
-                                $$.opnd = $1.opnd;
+                                if ($1.simb->ndims == 0) {
+                                    $$.opnd = $1.opnd;
+                                } else {
+                                    $$.opnd.atr.simb = NovaTemp ($1.simb->tvar);
+                                    GeraQuadrupla(OPCONTAPONT, $1.opnd, opndidle, $$.opnd);
+                                }
+
                             }
                         }  
                 |       CTINT  {
