@@ -627,13 +627,18 @@ ModPrincipal  	:   	PRINCIPAL
 
                             GeraQuadrupla(OPCALL, opnd1, opnd2, opndidle);
                             GeraQuadrupla(OPEXIT, opndidle, opndidle, opndidle);
-                            quadcorrente = modcorrente->listquad;
+                            quadcorrente = modcorrente->listquad->prox;
                             numquadcorrente = temp;
                         }
                         Corpo
                 ;
                 
-Comandos      	:   	COMANDOS {tabular();printf("comandos"); tab++;}  CmdComp {printf("\n"); tab--;}
+Comandos      	:   	COMANDOS {tabular();printf("comandos"); tab++;}  CmdComp {
+                            printf("\n"); tab--;
+                            if (quadcorrente->oper != OPRETURN) {
+                                GeraQuadrupla(OPRETURN, opndidle, opndidle, opndidle);
+                            }
+                        };
                 ;
                 
 CmdComp 		:   	ABCHAV {tab--;tabular();printf("{\n");tab++;}  ListCmd  FCHAV {
@@ -641,9 +646,6 @@ CmdComp 		:   	ABCHAV {tab--;tabular();printf("{\n");tab++;}  ListCmd  FCHAV {
                             tabular();
                             printf("}\n");
                             tab++;
-                            if (quadcorrente->oper != OPRETURN) {
-                                GeraQuadrupla(OPRETURN, opndidle, opndidle, opndidle);
-                            }
                         } 
                 ;
                     
@@ -771,6 +773,7 @@ CmdPara	    	:       PARA {tabular();tab++;printf("para ");}
                             }
                         } ExprAux4  PVIRG 
                         {
+                        //9
                             if($7.tipo != INTEGER && $7.tipo != CHAR)
                                 ExpressaoTipoInadequado(nometipvar[$7.tipo]);
                             printf("; ");
@@ -778,20 +781,27 @@ CmdPara	    	:       PARA {tabular();tab++;printf("para ");}
                         }
                         Expressao  
                         {
+                        //11
                             if($10.tipo != LOGICAL)
                                 ExpressaoTipoInadequado(nometipvar[$10.tipo]);
                             printf("; ");
                             opndaux.tipo = ROTOPND;
                             $<quad>$ = GeraQuadrupla(OPJF, $10.opnd, opndidle, opndaux);
                         } PVIRG {
+                        //13
                             $<quad>$ = GeraQuadrupla(NOP, opndidle, opndidle, opndidle);
                         }
                         ExprAux4  FPAR
                         {
+                        //16
                             if($14.tipo != INTEGER && $14.tipo != CHAR)
                                 ExpressaoTipoInadequado(nometipvar[$14.tipo]);
                             printf(")\n");
-                            $<quad>$ = quadcorrente;
+                            /*$<quad>$ = quadcorrente;*/
+                            $<quad>$ = GeraQuadrupla(OPATRIB, $14.opnd, opndidle, $3.opnd); 
+                        }
+                        {
+                        //17
                             $<quad>$ = GeraQuadrupla(NOP, opndidle, opndidle, opndidle);
                         } Comando {
                             tab--;
@@ -801,13 +811,20 @@ CmdPara	    	:       PARA {tabular();tab++;printf("para ");}
                             opndaux.atr.rotulo = $<quad>9;
                             quadaux2 = GeraQuadrupla(OPJUMP, opndidle, opndidle, opndaux);
                             $<quad>11->result.atr.rotulo = GeraQuadrupla(NOP, opndidle, opndidle, opndidle);
+
+                            $<quad>11->prox = $<quad>17;
+                            quadaux->prox = $<quad>13;
+                            $<quad>16->prox = quadaux2;
+                            RenumQuadruplas($<quad>11, quadcorrente);
                         }
                 ;
                 
 CmdLer   	    :       LER  ABPAR {tabular();printf("ler (");} ListLeit {
                             opnd1.tipo = INTOPND;
                             opnd1.atr.valint = $4;
-                            GeraQuadrupla(OPREAD, opnd1, opndidle, opndidle);
+                            if ($4 > 0) {
+                                GeraQuadrupla(OPREAD, opnd1, opndidle, opndidle);
+                            }
                         } FPAR  PVIRG {printf(");\n");}
                 ;
                     
@@ -815,13 +832,34 @@ ListLeit		:       Variavel
                         {
                             if  ($1.simb != NULL) $1.simb->inic = $1.simb->ref = TRUE;
                             $$ = 1;
-                            GeraQuadrupla(PARAM, $1.opnd, opndidle, opndidle);
+                            if ($1.simb->ndims == 0) {
+                                GeraQuadrupla(PARAM, $1.opnd, opndidle, opndidle);
+                            } else {
+                                opnd1.tipo = VAROPND;
+                                opnd1.atr.simb = NovaTemp ($1.simb->tvar);
+                                GeraQuadrupla(PARAM, opnd1, opndidle, opndidle);
+                                opndaux.tipo = INTOPND;
+                                opndaux.atr.valint = 1;
+                                GeraQuadrupla(OPREAD, opndaux, opndidle, opndidle);
+                                GeraQuadrupla (OPATRIBPONT, opnd1, opndidle, $1.opnd);
+                            }
                         }
                 |       ListLeit  VIRG {printf(", ");}  Variavel
                         {
                             if  ($4.simb != NULL) $4.simb->inic = $4.simb->ref = TRUE;
                             $$ = $1 + 1;
-                            GeraQuadrupla(PARAM, $4.opnd, opndidle, opndidle);
+                            if ($4.simb->ndims == 0) {
+                                GeraQuadrupla(PARAM, $4.opnd, opndidle, opndidle);
+                            } else {
+                                opnd1.tipo = VAROPND;
+                                opnd1.atr.simb = NovaTemp ($4.simb->tvar);
+                                GeraQuadrupla(PARAM, opnd1, opndidle, opndidle);
+                                opndaux.tipo = INTOPND;
+                                opndaux.atr.valint = 1;
+                                GeraQuadrupla(OPREAD, opndaux, opndidle, opndidle);
+                                GeraQuadrupla (OPATRIBPONT, opnd1, opndidle, $4.opnd);
+                                $$ -= 1;
+                            }
                         }
                 ;
                 

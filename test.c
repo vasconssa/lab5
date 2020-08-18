@@ -97,6 +97,16 @@ principal
 
 var {int (i, posic) carac (c) logic (fim)}
 comandos {
+    se (i == 0) {
+        i = 1;
+    } senao {
+        i = 2;
+    }
+    i = 3;
+    para i (0; i < 10; i+1) {
+        posic = i;
+    }
+    ler (i, palavra[0]);
 	ntab = 0;
     c = '\0';
 	escrever ("Nova palavra? (s/n): ");
