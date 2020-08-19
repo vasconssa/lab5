@@ -1,0 +1,453 @@
+programa TesteCodInt {{{
+
+	var {
+		int (vetor[50, 50])
+	}
+
+	funcao int testaOperacoesSimples ()
+
+	var {
+		int (i, j)
+		real (a, b)
+		logic (v, f)
+	}
+
+	comandos	{
+		v = verdade ;
+		f = falso ;
+		v = !f;
+		f = !v;
+		v = v || f;
+		f = v && f;
+		i = 0 ;
+		j = 2 ;
+		i = i+j;
+		j = i * i+j;
+		a = 2.5 ;
+		b = 2.5 ;
+		a = a+b * a;
+		v = a > b;
+		f = a < b;
+		vetor[i, j] = i+j;
+		escrever (a, b, i, j, vetor[i, j]);
+		retornar i;
+	}
+
+	procedimento testePara ()
+
+	var {
+		int (i, a, n)
+	}
+
+	comandos	{
+		a = 0 ;
+		n = 50 ;
+		para i (0 ; i <= n; i+1 )
+		{
+			a = i;
+			vetor[i, a] = n-a;
+		}
+	}
+
+	procedimento testeParaDuplo ()
+
+	var {
+		int (i, j, a, n)
+	}
+
+	comandos	{
+		a = 0 ;
+		n = 50 ;
+		ler (n);
+		para i (0 ; i <= n; i+1 )
+		{
+			para j (0 ; j <= n; j+1 )
+			{
+				a = i+i * j;
+				vetor[i, j] = a;
+			}
+		}
+	}
+
+	procedimento testeSeSenao ()
+
+	var {
+		int (a, b)
+		logic (v, f)
+	}
+
+	comandos	{
+		a = 1 ;
+		b = 2 ;
+		v = verdade ;
+		f = falso ;
+		ler (a, b, vetor[a * a+b, b]);
+		se (v == verdade )
+		{
+			a = b;
+		}
+		se (v == falso )
+		{
+			b = a;
+			a = 2 +b * 2 ;
+		}
+		senao
+		{
+			a = b;
+		}
+	}
+
+	procedimento testeEnquanto ()
+
+	var {
+		int (a, b)
+		logic (v, f)
+	}
+
+	comandos	{
+		enquanto (v == verdade  || f == falso )
+		{
+			a = a+b;
+			v = a > b;
+			f = (a * b) < b;
+		}
+	}
+
+	procedimento testeRepetir ()
+
+	var {
+		int (a, b)
+		logic (v, f)
+	}
+
+	comandos	{
+		repetir
+		{
+			a = a+b;
+			v = a > b;
+			f = (a * b) < b;
+		}
+		enquanto (v == verdade  || f == falso );
+	}
+
+
+	principal 
+
+	var {
+		int (a)
+	}
+
+	comandos	{
+		a = testaOperacoesSimples ();
+		chamar testeEnquanto ();
+		chamar testePara ();
+		chamar testePara ();
+		chamar testeParaDuplo ();
+		chamar testeRepetir ();
+		chamar testeSeSenao ();
+	}
+
+}}}
+
+b: Nao Inicializada
+b: Nao Inicializada
+
+
+   TABELA  DE  SIMBOLOS:
+
+Classe 3:
+  (v, IDVAR, testeRepetir, LOGICAL, 1, 1)
+  (v, IDVAR, testeEnquanto, LOGICAL, 1, 1)
+  (v, IDVAR, testeSeSenao, LOGICAL, 1, 1)
+  (v, IDVAR, testaOperacoesSimples, LOGICAL, 1, 1)
+Classe 4:
+  (testeParaDuplo, IDPROC, ##global)
+  (##1, IDVAR, LOGICAL, 1, 1)
+Classe 5:
+  (a, IDVAR, principal, INTEGER, 1, 1)
+  (a, IDVAR, testeRepetir, INTEGER, 1, 1)
+  (a, IDVAR, testeEnquanto, INTEGER, 1, 1)
+  (a, IDVAR, testeSeSenao, INTEGER, 1, 1)
+  (a, IDVAR, testeParaDuplo, INTEGER, 1, 1)
+  (a, IDVAR, testePara, INTEGER, 1, 1)
+  (##2, IDVAR, LOGICAL, 1, 1)
+  (a, IDVAR, testaOperacoesSimples, FLOAT, 1, 1)
+  (##global, IDGLOB)
+Classe 6:
+  (b, IDVAR, testeRepetir, INTEGER, 0, 1)
+  (b, IDVAR, testeEnquanto, INTEGER, 0, 1)
+  (b, IDVAR, testeSeSenao, INTEGER, 1, 1)
+  (##10, IDVAR, LOGICAL, 1, 1)
+  (##3, IDVAR, LOGICAL, 1, 1)
+  (b, IDVAR, testaOperacoesSimples, FLOAT, 1, 1)
+Classe 7:
+  (##20, IDVAR, LOGICAL, 1, 1)
+  (##11, IDVAR, LOGICAL, 1, 1)
+  (##4, IDVAR, LOGICAL, 1, 1)
+Classe 8:
+  (##30, IDVAR, INTEGER, 1, 1)
+  (##21, IDVAR, INTEGER, 1, 1)
+  (##12, IDVAR, INTEGER, 1, 1)
+  (##5, IDVAR, INTEGER, 1, 1)
+  (vetor, IDVAR, ##global, INTEGER, 1, 1, EH ARRAY
+	ndims = 2, dimensoes:  50  50)
+Classe 9:
+  (##40, IDVAR, INTEGER, 1, 1)
+  (##31, IDVAR, LOGICAL, 1, 1)
+  (##22, IDVAR, LOGICAL, 1, 1)
+  (##13, IDVAR, INTEGER, 1, 1)
+  (##6, IDVAR, INTEGER, 1, 1)
+Classe 10:
+  (f, IDVAR, testeRepetir, LOGICAL, 1, 1)
+  (##41, IDVAR, LOGICAL, 1, 1)
+  (f, IDVAR, testeEnquanto, LOGICAL, 1, 1)
+  (##32, IDVAR, LOGICAL, 1, 1)
+  (f, IDVAR, testeSeSenao, LOGICAL, 1, 1)
+  (##23, IDVAR, INTEGER, 1, 1)
+  (##14, IDVAR, INTEGER, 1, 1)
+  (##7, IDVAR, INTEGER, 1, 1)
+  (f, IDVAR, testaOperacoesSimples, LOGICAL, 1, 1)
+Classe 11:
+  (##42, IDVAR, INTEGER, 1, 1)
+  (##33, IDVAR, INTEGER, 1, 1)
+  (##24, IDVAR, INTEGER, 1, 1)
+  (##15, IDVAR, INTEGER, 1, 1)
+  (##8, IDVAR, FLOAT, 1, 1)
+Classe 12:
+  (##43, IDVAR, LOGICAL, 1, 1)
+  (testeEnquanto, IDPROC, ##global)
+  (##34, IDVAR, INTEGER, 1, 1)
+  (##25, IDVAR, INTEGER, 1, 1)
+  (##16, IDVAR, LOGICAL, 1, 1)
+  (##9, IDVAR, FLOAT, 1, 1)
+Classe 13:
+  (##44, IDVAR, INTEGER, 1, 1)
+  (##35, IDVAR, LOGICAL, 1, 1)
+  (##26, IDVAR, INTEGER, 1, 1)
+  (i, IDVAR, testeParaDuplo, INTEGER, 1, 1)
+  (##17, IDVAR, INTEGER, 1, 1)
+  (i, IDVAR, testePara, INTEGER, 1, 1)
+  (i, IDVAR, testaOperacoesSimples, INTEGER, 1, 1)
+  (TesteCodInt, IDPROG, ##global)
+Classe 14:
+  (##45, IDVAR, LOGICAL, 1, 1)
+  (##36, IDVAR, LOGICAL, 1, 1)
+  (##27, IDVAR, INTEGER, 1, 1)
+  (j, IDVAR, testeParaDuplo, INTEGER, 1, 1)
+  (##18, IDVAR, INTEGER, 1, 1)
+  (j, IDVAR, testaOperacoesSimples, INTEGER, 1, 1)
+Classe 15:
+  (##46, IDVAR, LOGICAL, 1, 1)
+  (testeRepetir, IDPROC, ##global)
+  (##37, IDVAR, LOGICAL, 1, 1)
+  (##28, IDVAR, INTEGER, 1, 1)
+  (##19, IDVAR, INTEGER, 1, 1)
+Classe 16:
+  (##47, IDVAR, LOGICAL, 1, 1)
+  (##38, IDVAR, INTEGER, 1, 1)
+  (##29, IDVAR, INTEGER, 1, 1)
+  (testeSeSenao, IDPROC, ##global)
+Classe 17:
+  (##48, IDVAR, LOGICAL, 1, 1)
+  (##39, IDVAR, LOGICAL, 1, 1)
+  (testePara, IDPROC, ##global)
+Classe 18:
+  (##49, IDVAR, INTEGER, 1, 1)
+  (n, IDVAR, testeParaDuplo, INTEGER, 1, 1)
+  (n, IDVAR, testePara, INTEGER, 1, 1)
+Classe 19:
+  (principal, IDFUNC, ##global)
+Classe 22:
+  (testaOperacoesSimples, IDFUNC, ##global)
+
+
+Quadruplas do modulo TesteCodInt:
+
+	   1) OPENMOD, (MODULO, TesteCodInt), (IDLE), (IDLE)
+	   2) CALL, (MODULO, principal), (INT, 0), (IDLE)
+	   3) EXIT, (IDLE), (IDLE), (IDLE)
+
+Quadruplas do modulo testaOperacoesSimples:
+
+	   1) OPENMOD, (MODULO, testaOperacoesSimples), (IDLE), (IDLE)
+	   2) ATRIB, (LOGIC, 1), (IDLE), (VAR, v)
+	   3) ATRIB, (LOGIC, 0), (IDLE), (VAR, f)
+	   4) NOT, (VAR, f), (IDLE), (VAR, ##1)
+	   5) ATRIB, (VAR, ##1), (IDLE), (VAR, v)
+	   6) NOT, (VAR, v), (IDLE), (VAR, ##2)
+	   7) ATRIB, (VAR, ##2), (IDLE), (VAR, f)
+	   8) OR, (VAR, v), (VAR, f), (VAR, ##3)
+	   9) ATRIB, (VAR, ##3), (IDLE), (VAR, v)
+	  10) AND, (VAR, v), (VAR, f), (VAR, ##4)
+	  11) ATRIB, (VAR, ##4), (IDLE), (VAR, f)
+	  12) ATRIB, (INT, 0), (IDLE), (VAR, i)
+	  13) ATRIB, (INT, 2), (IDLE), (VAR, j)
+	  14) MAIS, (VAR, i), (VAR, j), (VAR, ##5)
+	  15) ATRIB, (VAR, ##5), (IDLE), (VAR, i)
+	  16) MULT, (VAR, i), (VAR, i), (VAR, ##6)
+	  17) MAIS, (VAR, ##6), (VAR, j), (VAR, ##7)
+	  18) ATRIB, (VAR, ##7), (IDLE), (VAR, j)
+	  19) ATRIB, (REAL, 2.5), (IDLE), (VAR, a)
+	  20) ATRIB, (REAL, 2.5), (IDLE), (VAR, b)
+	  21) MULT, (VAR, b), (VAR, a), (VAR, ##8)
+	  22) MAIS, (VAR, a), (VAR, ##8), (VAR, ##9)
+	  23) ATRIB, (VAR, ##9), (IDLE), (VAR, a)
+	  24) GT, (VAR, a), (VAR, b), (VAR, ##10)
+	  25) ATRIB, (VAR, ##10), (IDLE), (VAR, v)
+	  26) LT, (VAR, a), (VAR, b), (VAR, ##11)
+	  27) ATRIB, (VAR, ##11), (IDLE), (VAR, f)
+	  28) IND, (VAR, i), (IDLE), (IDLE)
+	  29) IND, (VAR, j), (IDLE), (IDLE)
+	  30) INDEX, (VAR, vetor), (INT, 2), (VAR, ##12)
+	  31) MAIS, (VAR, i), (VAR, j), (VAR, ##13)
+	  32) ATRIBPONT, (VAR, ##13), (IDLE), (VAR, ##12)
+	  33) PARAM, (VAR, a), (IDLE), (IDLE)
+	  34) PARAM, (VAR, b), (IDLE), (IDLE)
+	  35) PARAM, (VAR, i), (IDLE), (IDLE)
+	  36) PARAM, (VAR, j), (IDLE), (IDLE)
+	  37) IND, (VAR, i), (IDLE), (IDLE)
+	  38) IND, (VAR, j), (IDLE), (IDLE)
+	  39) INDEX, (VAR, vetor), (INT, 2), (VAR, ##14)
+	  40) CONTAPONT, (VAR, ##14), (IDLE), (VAR, ##15)
+	  41) PARAM, (VAR, ##15), (IDLE), (IDLE)
+	  42) WRITE, (INT, 5), (IDLE), (IDLE)
+	  43) RETURN, (VAR, i), (IDLE), (IDLE)
+
+Quadruplas do modulo testePara:
+
+	   1) OPENMOD, (MODULO, testePara), (IDLE), (IDLE)
+	   2) ATRIB, (INT, 0), (IDLE), (VAR, a)
+	   3) ATRIB, (INT, 50), (IDLE), (VAR, n)
+	   4) NOP, (IDLE), (IDLE), (IDLE)
+	   5) LE, (VAR, i), (VAR, n), (VAR, ##16)
+	   6) JF, (VAR, ##16), (IDLE), (ROTULO, 18)
+	   7) NOP, (IDLE), (IDLE), (IDLE)
+	   8) ATRIB, (VAR, i), (IDLE), (VAR, a)
+	   9) IND, (VAR, i), (IDLE), (IDLE)
+	  10) IND, (VAR, a), (IDLE), (IDLE)
+	  11) INDEX, (VAR, vetor), (INT, 2), (VAR, ##18)
+	  12) MENOS, (VAR, n), (VAR, a), (VAR, ##19)
+	  13) ATRIBPONT, (VAR, ##19), (IDLE), (VAR, ##18)
+	  14) NOP, (IDLE), (IDLE), (IDLE)
+	  15) MAIS, (VAR, i), (INT, 1), (VAR, ##17)
+	  16) ATRIB, (VAR, ##17), (IDLE), (VAR, i)
+	  17) JUMP, (IDLE), (IDLE), (ROTULO, 4)
+	  18) NOP, (IDLE), (IDLE), (IDLE)
+	  19) RETURN, (IDLE), (IDLE), (IDLE)
+
+Quadruplas do modulo testeParaDuplo:
+
+	   1) OPENMOD, (MODULO, testeParaDuplo), (IDLE), (IDLE)
+	   2) ATRIB, (INT, 0), (IDLE), (VAR, a)
+	   3) ATRIB, (INT, 50), (IDLE), (VAR, n)
+	   4) PARAM, (VAR, n), (IDLE), (IDLE)
+	   5) READ, (INT, 1), (IDLE), (IDLE)
+	   6) NOP, (IDLE), (IDLE), (IDLE)
+	   7) LE, (VAR, i), (VAR, n), (VAR, ##20)
+	   8) JF, (VAR, ##20), (IDLE), (ROTULO, 30)
+	   9) NOP, (IDLE), (IDLE), (IDLE)
+	  10) NOP, (IDLE), (IDLE), (IDLE)
+	  11) LE, (VAR, j), (VAR, n), (VAR, ##22)
+	  12) JF, (VAR, ##22), (IDLE), (ROTULO, 25)
+	  13) NOP, (IDLE), (IDLE), (IDLE)
+	  14) MULT, (VAR, i), (VAR, j), (VAR, ##24)
+	  15) MAIS, (VAR, i), (VAR, ##24), (VAR, ##25)
+	  16) ATRIB, (VAR, ##25), (IDLE), (VAR, a)
+	  17) IND, (VAR, i), (IDLE), (IDLE)
+	  18) IND, (VAR, j), (IDLE), (IDLE)
+	  19) INDEX, (VAR, vetor), (INT, 2), (VAR, ##26)
+	  20) ATRIBPONT, (VAR, a), (IDLE), (VAR, ##26)
+	  21) NOP, (IDLE), (IDLE), (IDLE)
+	  22) MAIS, (VAR, j), (INT, 1), (VAR, ##23)
+	  23) ATRIB, (VAR, ##23), (IDLE), (VAR, j)
+	  24) JUMP, (IDLE), (IDLE), (ROTULO, 10)
+	  25) NOP, (IDLE), (IDLE), (IDLE)
+	  26) NOP, (IDLE), (IDLE), (IDLE)
+	  27) MAIS, (VAR, i), (INT, 1), (VAR, ##21)
+	  28) ATRIB, (VAR, ##21), (IDLE), (VAR, i)
+	  29) JUMP, (IDLE), (IDLE), (ROTULO, 6)
+	  30) NOP, (IDLE), (IDLE), (IDLE)
+	  31) RETURN, (IDLE), (IDLE), (IDLE)
+
+Quadruplas do modulo testeSeSenao:
+
+	   1) OPENMOD, (MODULO, testeSeSenao), (IDLE), (IDLE)
+	   2) ATRIB, (INT, 1), (IDLE), (VAR, a)
+	   3) ATRIB, (INT, 2), (IDLE), (VAR, b)
+	   4) ATRIB, (LOGIC, 1), (IDLE), (VAR, v)
+	   5) ATRIB, (LOGIC, 0), (IDLE), (VAR, f)
+	   6) PARAM, (VAR, a), (IDLE), (IDLE)
+	   7) PARAM, (VAR, b), (IDLE), (IDLE)
+	   8) MULT, (VAR, a), (VAR, a), (VAR, ##27)
+	   9) MAIS, (VAR, ##27), (VAR, b), (VAR, ##28)
+	  10) IND, (VAR, ##28), (IDLE), (IDLE)
+	  11) IND, (VAR, b), (IDLE), (IDLE)
+	  12) INDEX, (VAR, vetor), (INT, 2), (VAR, ##29)
+	  13) PARAM, (VAR, ##30), (IDLE), (IDLE)
+	  14) READ, (INT, 1), (IDLE), (IDLE)
+	  15) ATRIBPONT, (VAR, ##30), (IDLE), (VAR, ##29)
+	  16) READ, (INT, 2), (IDLE), (IDLE)
+	  17) EQ, (VAR, v), (LOGIC, 1), (VAR, ##31)
+	  18) JF, (VAR, ##31), (IDLE), (ROTULO, 20)
+	  19) ATRIB, (VAR, b), (IDLE), (VAR, a)
+	  20) NOP, (IDLE), (IDLE), (IDLE)
+	  21) EQ, (VAR, v), (LOGIC, 0), (VAR, ##32)
+	  22) JF, (VAR, ##32), (IDLE), (ROTULO, 28)
+	  23) ATRIB, (VAR, a), (IDLE), (VAR, b)
+	  24) MULT, (VAR, b), (INT, 2), (VAR, ##33)
+	  25) MAIS, (INT, 2), (VAR, ##33), (VAR, ##34)
+	  26) ATRIB, (VAR, ##34), (IDLE), (VAR, a)
+	  27) JUMP, (IDLE), (IDLE), (ROTULO, 30)
+	  28) NOP, (IDLE), (IDLE), (IDLE)
+	  29) ATRIB, (VAR, b), (IDLE), (VAR, a)
+	  30) NOP, (IDLE), (IDLE), (IDLE)
+	  31) RETURN, (IDLE), (IDLE), (IDLE)
+
+Quadruplas do modulo testeEnquanto:
+
+	   1) OPENMOD, (MODULO, testeEnquanto), (IDLE), (IDLE)
+	   2) NOP, (IDLE), (IDLE), (IDLE)
+	   3) EQ, (VAR, v), (LOGIC, 1), (VAR, ##35)
+	   4) EQ, (VAR, f), (LOGIC, 0), (VAR, ##36)
+	   5) OR, (VAR, ##35), (VAR, ##36), (VAR, ##37)
+	   6) JF, (VAR, ##37), (IDLE), (ROTULO, 15)
+	   7) MAIS, (VAR, a), (VAR, b), (VAR, ##38)
+	   8) ATRIB, (VAR, ##38), (IDLE), (VAR, a)
+	   9) GT, (VAR, a), (VAR, b), (VAR, ##39)
+	  10) ATRIB, (VAR, ##39), (IDLE), (VAR, v)
+	  11) MULT, (VAR, a), (VAR, b), (VAR, ##40)
+	  12) LT, (VAR, ##40), (VAR, b), (VAR, ##41)
+	  13) ATRIB, (VAR, ##41), (IDLE), (VAR, f)
+	  14) JUMP, (IDLE), (IDLE), (ROTULO, 2)
+	  15) NOP, (IDLE), (IDLE), (IDLE)
+	  16) RETURN, (IDLE), (IDLE), (IDLE)
+
+Quadruplas do modulo testeRepetir:
+
+	   1) OPENMOD, (MODULO, testeRepetir), (IDLE), (IDLE)
+	   2) NOP, (IDLE), (IDLE), (IDLE)
+	   3) MAIS, (VAR, a), (VAR, b), (VAR, ##42)
+	   4) ATRIB, (VAR, ##42), (IDLE), (VAR, a)
+	   5) GT, (VAR, a), (VAR, b), (VAR, ##43)
+	   6) ATRIB, (VAR, ##43), (IDLE), (VAR, v)
+	   7) MULT, (VAR, a), (VAR, b), (VAR, ##44)
+	   8) LT, (VAR, ##44), (VAR, b), (VAR, ##45)
+	   9) ATRIB, (VAR, ##45), (IDLE), (VAR, f)
+	  10) EQ, (VAR, v), (LOGIC, 1), (VAR, ##46)
+	  11) EQ, (VAR, f), (LOGIC, 0), (VAR, ##47)
+	  12) OR, (VAR, ##46), (VAR, ##47), (VAR, ##48)
+	  13) JF, (VAR, ##48), (IDLE), (ROTULO, 2)
+	  14) RETURN, (IDLE), (IDLE), (IDLE)
+
+Quadruplas do modulo principal:
+
+	   1) OPENMOD, (MODULO, principal), (IDLE), (IDLE)
+	   2) CALL, (MODULO, testaOperacoesSimples), (INT, 0), (VAR, ##49)
+	   3) ATRIB, (VAR, ##49), (IDLE), (VAR, a)
+	   4) CALL, (MODULO, testeEnquanto), (INT, 0), (IDLE)
+	   5) CALL, (MODULO, testePara), (INT, 0), (IDLE)
+	   6) CALL, (MODULO, testePara), (INT, 0), (IDLE)
+	   7) CALL, (MODULO, testeParaDuplo), (INT, 0), (IDLE)
+	   8) CALL, (MODULO, testeRepetir), (INT, 0), (IDLE)
+	   9) CALL, (MODULO, testeSeSenao), (INT, 0), (IDLE)
+	  10) RETURN, (IDLE), (IDLE), (IDLE)
