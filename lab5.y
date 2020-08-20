@@ -75,6 +75,7 @@ typedef char bool;
 #define     OPCALL          28
 #define     OPEXIT          29
 #define     OPRETURN        30
+#define		OPJT			31
 
 /* Definicao de constantes para os tipos de operandos de quadruplas */
 
@@ -107,11 +108,11 @@ char *nometipvar[5] = {"NOTVAR",
 
 /* Strings para operadores de quadruplas */
 
-char *nomeoperquad[31] = {"",
+char *nomeoperquad[32] = {"",
 	"OR", "AND", "LT", "LE", "GT", "GE", "EQ", "NE", "MAIS",
 	"MENOS", "MULT", "DIV", "RESTO", "MENUN", "NOT", "ATRIB",
 	"OPENMOD", "NOP", "JUMP", "JF", "PARAM", "READ", "WRITE", "IND", "INDEX", "CONTAPONT", "ATRIBPONT", "CALL",
-    "EXIT", "RETURN"
+    "EXIT", "RETURN", "JT"
 };
 
 /*
@@ -743,7 +744,7 @@ CmdRepetir  	:       REPETIR {
                         Expressao {
                             opndaux.tipo = ROTOPND;
                             opndaux.atr.rotulo = $<quad>2;
-                            GeraQuadrupla(OPJF, $7.opnd, opndidle, opndaux);
+                            GeraQuadrupla(OPJT, $7.opnd, opndidle, opndaux);
                         } FPAR  PVIRG
                         {
                             printf(");");
@@ -798,7 +799,7 @@ CmdPara	    	:       PARA {tabular();tab++;printf("para ");}
                                 ExpressaoTipoInadequado(nometipvar[$14.tipo]);
                             printf(")\n");
                             /*$<quad>$ = quadcorrente;*/
-                            $<quad>$ = GeraQuadrupla(OPATRIB, $14.opnd, opndidle, $3.opnd); 
+                            $<quad>$ = GeraQuadrupla(OPMAIS, $14.opnd, opndidle, $3.opnd); 
                         }
                         {
                         //17

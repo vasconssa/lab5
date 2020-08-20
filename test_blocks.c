@@ -22,7 +22,7 @@ programa TesteCodInt {{{
             v = a > b;
             f = a < b;
             vetor[i, j] = i + j;
-            escrever(a, b, i, j, vetor[i, j]);
+            escrever(a, " ", b, " ", i, " ", j, " ", vetor[i, j]);
 
             retornar i;
         }
@@ -35,6 +35,7 @@ programa TesteCodInt {{{
             para i (0; i <= n; i+1) {
                 a = i;
                 vetor[i, a] = n - a;
+                escrever(i);
             }
         }
     
@@ -78,10 +79,14 @@ programa TesteCodInt {{{
     procedimento testeEnquanto() 
         var {int (a, b) logic (v, f)}
         comandos {
-            enquanto (v == verdade || f == falso) {
+            a = 1;
+            b = 2;
+            enquanto (b < 10) {
                 a = a + b;
+                escrever(a);
                 v = a > b;
                 f = (a * b) < b;
+                b = b + 1;
             }
         }
     
@@ -89,11 +94,14 @@ programa TesteCodInt {{{
     procedimento testeRepetir() 
         var {int (a, b) logic (v, f)}
         comandos {
+            a = 1;
+            b = 2;
             repetir {
                 a = a + b;
                 v = a > b;
                 f = (a * b) < b;
-            } enquanto (v == verdade || f == falso);
+                b = b + 1;
+            } enquanto (b < 10);
         }
     
 
@@ -101,12 +109,11 @@ programa TesteCodInt {{{
 
     var {int (a)}
     comandos {
-        a = testaOperacoesSimples();
-        chamar testeEnquanto();
-        chamar testePara();
-        chamar testePara();
-        chamar testeParaDuplo();
+        /*a = testaOperacoesSimples();*/
+        /*chamar testeEnquanto();*/
+        /*chamar testePara();*/
+        /*chamar testeParaDuplo();*/
         chamar testeRepetir();
-        chamar testeSeSenao();
+        /*chamar testeSeSenao();*/
     }
 }}}
